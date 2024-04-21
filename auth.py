@@ -22,3 +22,11 @@ def tryLogin(email, password):
         return 1
     except:
         return -1
+
+def signUp(email, password):
+    try:
+        user = auth.get_user_by_email(email)
+        return -1
+    except:
+        auth.create_user_with_email_and_password(email, password)
+        return 1
