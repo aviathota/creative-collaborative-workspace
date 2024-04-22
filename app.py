@@ -12,7 +12,7 @@ def login():
     email = request.form['email']
     password = request.form['password']
     
-    if tryLogin(email, password) != 1:
+    if tryLogin(email, password) == "fail":
         flash('Invalid username or password', 'error')
         return redirect('/login_error')
     
@@ -24,8 +24,8 @@ def signup_page():
         email = request.form['email']
         password = request.form['password']
         
-        if signUp(email, password) != 1:
-            flash('Email already being used', 'error')
+        if trySignUp(email, password) == "fail":
+            flash('Signup process failed', 'error')
             return redirect('/signup_error')
         
         return "Registration successful"
@@ -39,6 +39,14 @@ def dashboard():
 @app.route('/login_error')
 def login_failed():
     return render_template('login_error.html')
+
+@app.route('/signup_email_used')
+def signup_email_used():
+    return render_template('signup_email_used.html')
+
+@app.route('/signup_error')
+def signup_failed():
+    return render_template('signup_error.html')
 
 if __name__ == '__main__':
     app.secret_key = 'CS4440'
