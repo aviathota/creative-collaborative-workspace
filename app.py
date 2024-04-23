@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash
 from auth import *
+import db_secrets as sec
 
 app = Flask(__name__)
 
@@ -49,5 +50,5 @@ def signup_failed():
     return render_template('signup_error.html')
 
 if __name__ == '__main__':
-    app.secret_key = 'CS4440'
+    app.secret_key = sec.firebase_secret_key
     app.run(debug=True)
