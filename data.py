@@ -4,7 +4,6 @@ import db_secrets as sec
 client = boto3.client('dynamodb', aws_access_key_id = sec.aws_access_key_id, aws_secret_access_key = sec.aws_secret_access_key, region_name = 'us-east-2')
 tableName = "ccw-projects"
 
-<<<<<<< HEAD
 def createNewProject(name, user_id):
     new_item = {
         'ProjectID': {'S': name},
@@ -56,17 +55,3 @@ def inviteMembers(project_id, user_ids):
             print("Adding user " + user_id + " failed.")
             return "fail"
     return "success"
-=======
-item = {
-    'ProjectID': {'S': 'hi'},
-    'UserIDs': {'L': [{'N': 1}]}
-}
-
-response = client.put_item(
-    TableName=tableName,
-    Item=item
-)
-
-print("PutItem succeeded:")
-print(response)
->>>>>>> 5d290a4b44f8bbd14d850a2dc4d8c89c3fec380e
