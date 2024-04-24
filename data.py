@@ -55,3 +55,16 @@ def inviteMembers(project_id, user_ids):
             print("Adding user " + user_id + " failed.")
             return "fail"
     return "success"
+
+def getProjectsWithUser(user_id):
+    response = client.scan(
+        TableName=tableName,
+        FilterExpression='contains(Members, :user)',
+        ExpressionAttributeValues={':user': {'S': user_id}}
+    )
+    
+    projects = [item['ProjectID']['S'] for item in response['Items']]
+    
+    return projects
+
+print(getProjectsWithUser("user1"))
