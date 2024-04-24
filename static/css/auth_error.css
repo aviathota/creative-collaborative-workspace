@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+.failed-container, .signup-error-container {
+    width: 300px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.failed-container h2, .signup-error-container h2 {
+    color: #333;
+}
+
+.failed-container p, .signup-error-container p {
+    color: #FF6347;
+    margin-bottom: 20px;
+}
+
+.failed-container .btn, .signup-error-container .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.failed-container .btn:hover, .signup-error-container .btn:hover {
+    background-color: #45a049;
+}
