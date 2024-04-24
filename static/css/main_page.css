@@ -1,0 +1,124 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .header {
+    text-align: center;
+    padding: 10px;
+    font-size: 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .main {
+    flex: 1;
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 200px; /* Adjust as necessary */
+    border-right: 1px solid #ccc;
+    /* Rest of your sidebar styles */
+  }
+  
+  .content {
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+    padding: 20px;
+  }
+  
+  .section-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .files-section, .tasks-section {
+    flex: 1;
+    margin: 0 10px;
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+  
+  .files-section {
+    margin-right: 10px;
+  }
+  
+  .tasks-section {
+    margin-left: 10px;
+  }
+  
+  .file-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    background-color: #e1e1e1;
+    border-radius: 5px;
+  }
+  
+  .file-icon .icon {
+    font-size: 30px;
+  }
+  
+  .file-icon .label {
+    display: none; /* Hide the label text by default */
+  }
+  
+  .add-file-icon, .add-task {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: #fff;
+  }
+  
+  .task {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .field {
+    margin-bottom: 5px;
+  }
+  
+  /* Add responsiveness */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px;
+    }
+  
+    .main-content {
+      padding: 10px;
+    }
+  
+    .file-icon {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .add-file-icon, .add-task {
+      width: 50px;
+      height: 50px;
+    }
+  
+    h1 {
+      font-size: 20px;
+    }
+  }
+  
