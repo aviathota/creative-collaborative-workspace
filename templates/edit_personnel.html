@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Personnel - {{ project.name }}</title>
+    <title>Edit Personnel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main_pages.css') }}">
 </head>
 <body>
@@ -27,27 +27,61 @@
             </a>
         </div>
         <div class="main-content">
-            <h1>Edit Personnel - {{ project.name }}</h1>
-            <form id="edit-personnel-form">
+            <h1>Edit Personnel</h1>
+            <div id="contributors">
                 <div class="input-group">
-                    <label for="new-contributor">New Contributor:</label>
-                    <input type="text" id="new-contributor" name="new-contributor">
-                    <button type="button" id="add-contributor-btn">Add</button>
+                    <label for="contributor1">Contributor:</label>
+                    <input type="text" id="contributor1" name="contributor" class="contributor-input">
                 </div>
-                <div class="contributors">
-                    <label>Current Contributors:</label>
-                    {% for contributor in project.contributors %}
-                        <div>{{ contributor }}</div>
-                    {% endfor %}
-                </div>
-                <button type="submit">Save Changes</button>
-            </form>
-            <button onclick="goBack()">Go Back</button>
+            </div>
+            <button onclick="addContributor()">Add Contributor</button>
+            <button onclick="saveContributors('{{ project.name }}')">Save Contributors</button>
+            <button onclick="goBack('{{ project.name }}')">Go Back</button>
         </div>
     </div>
+
     <script>
-        function goBack() {
-            window.history.back();
+        function addContributor() {
+            const contributorsContainer = document.getElementById('contributors');
+            const inputGroup = document.createElement('div');
+            inputGroup.classList.add('input-group');
+            inputGroup.innerHTML = `
+                <label for="contributor">Contributor:</label>
+                <input type="text" name="contributor" class="contributor-input">
+            `;
+            contributorsContainer.appendChild(inputGroup);
+        }
+
+        function saveContributors(projectName) {
+            const contributors = document.querySelectorAll('.contributor-input');
+            const contributorList = [];
+            contributors.forEach(input => {
+                const value = input.value.trim();
+                if (value !== '') {
+                    contributorList.push(value);
+                }
+            });
+            fetch('/add_contributors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ project_name: projectName, contributors: contributorList })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Contributors saved successfully!');
+                } else {
+                    alert('Failed to save contributors');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving contributors:', error);
+            });
+        }
+
+        function goBack(projectName) {
+            window.location.href = '/project/' + projectName;
         }
     </script>
 </body>

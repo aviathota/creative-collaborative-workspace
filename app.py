@@ -121,6 +121,24 @@ def edit_personnel(project_name):
     else:
         return render_template('invalid_perms.html')
 
+@app.route('/add_contributors', methods=['POST'])
+def add_contributors():
+    data = request.get_json()
+    project_name = data.get('project_name')
+    contributors = data.get('contributors', [])
+    print(project_name)
+    try:
+        if dt.checkOwnerPerms(dt.userData['email'], project_name) == "success":
+            response = dt.inviteMembers(project_name, contributors)
+            print("wawa")
+            return "success"
+        else:
+            print("uh")
+            return "fail"
+    except:
+        print("did it work")
+        return "fail"
+
 if __name__ == '__main__':
     dt.userData = {}
     app.secret_key = sec.firebase_secret_key
