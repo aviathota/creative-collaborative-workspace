@@ -37,6 +37,20 @@
             <button onclick="edit_personnel()">Edit Personnel</button>
             <h1>Manage Tasks</h1>
             <button onclick="manageTasks()">Manage Tasks</button>
+            <h1>Files</h1>
+            <ul id="file-list">
+                {% for file in files %}
+                <li><a href="#" onclick="downloadFile('{{ file.name }}')">Download {{ file.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <button onclick="uploadFile()">Upload Files</button>
+            
+            <div id="upload-form" style="display: none;">
+                <h2>Upload Files for {{ project.name }}</h2>
+                <input type="file" id="file-input">
+                <button onclick="submitFile()">Upload</button>
+            </div>
             <button onclick="goBack()">Go Back</button>
         </div>
     </div>
@@ -52,6 +66,65 @@
 
         function manageTasks() {
             window.location.href = '/project/{{ project.name }}/tasks';
+        }
+
+        function uploadFile() {
+            document.getElementById('upload-form').style.display = 'block';
+        }
+
+        function submitFile() {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            const projectName = "{{ project.name }}";
+
+            if (!file) {
+                alert('No file selected');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('project_name', projectName);
+
+            fetch('/upload_file', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('File uploaded successfully');
+                    fileInput.value = '';
+                } else {
+                    alert('Failed to upload file');
+                }
+            })
+            .catch(error => {
+                alert('Error uploading file');
+            });
+        }
+
+        function downloadFile(filename) {
+            fetch('/download_file/' + filename)
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error('Failed to download file');
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => {
+                alert('Error downloading file: ' + error.message);
+            });
         }
     </script>
 </body>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, send_file
 from auth import *
 import db_secrets as sec
 import data as dt
@@ -105,7 +105,8 @@ def view_projects():
 def project(project_name):
     if dt.checkProjectPerms(dt.userData['email'], project_name) == "success":
         project_info = dt.getProjectInfo(project_name)
-        return render_template('project.html', project=project_info)
+        files_info = dt.getProjectFiles(project_name)
+        return render_template('project.html', project=project_info, files=files_info)
     else:
         return render_template('invalid_perms.html')
 
@@ -177,6 +178,27 @@ def delete_task():
     response = dt.completeTask(task_name, project_id)
     return response
 
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return "success"
+
+    file = request.files['file']
+    project_name = request.form.get('project_name')
+    try:
+        reponse = dt.uploadFiles(file, project_name)
+        return "success"
+    except:
+        return "fail"
+
+@app.route('/download_file/<filename>', methods=['GET'])
+def download_file(filename):
+    try:
+        response = dt.downloadFile(filename)
+        return "success"
+    except:
+        return "fail"
+    
 if __name__ == '__main__':
     dt.userData = {}
     app.secret_key = sec.firebase_secret_key

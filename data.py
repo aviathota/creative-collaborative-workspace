@@ -2,9 +2,11 @@ import boto3
 import db_secrets as sec
 from datetime import datetime
 import random
+import os
+from flask import send_file
 
 client = boto3.client('dynamodb', aws_access_key_id = sec.aws_access_key_id, aws_secret_access_key = sec.aws_secret_access_key, region_name = 'us-east-2')
-
+s3 = boto3.client('s3', aws_access_key_id=sec.aws_access_key_id, aws_secret_access_key=sec.aws_secret_access_key)
 
 userData = {
     'email': None,
@@ -357,3 +359,42 @@ def completeTask(task_name, project_id):
         return "success"
     except:
         return "fail"
+
+def uploadFiles(file, project_name):
+    s3_bucket = "ccw-storage"
+    
+    if file.filename == '':
+        return 'No file selected', 400
+
+    try:
+        s3.upload_fileobj(file, s3_bucket, f"{project_name}/{file.filename}")
+        return 'File uploaded successfully', 200
+    except Exception as e:
+        return 'Failed to upload file', 500
+    
+def getProjectFiles(project_name):
+    try:
+        response = s3.list_objects_v2(
+            Bucket='ccw-storage',
+            Prefix=f'{project_name}/'
+        )
+        files = []
+        if 'Contents' in response:
+            for file in response['Contents']:
+                url = s3.generate_presigned_url('get_object', Params={'Bucket': 'ccw-storage', 'Key': file['Key']}, ExpiresIn=3600)
+                files.append({
+                    'name': os.path.basename(file['Key']),
+                    'url': url
+                })
+        
+        return files
+    except Exception as e:
+        return "fail"
+
+def downloadFile(filename):
+    try:
+        response = s3.get_object(Bucket='ccw-objects', Key=filename)
+        return send_file(response['Body'], as_attachment=True, attachment_filename=filename)
+    except Exception as e:
+        print(e)
+        return "Failed to download file", 500
