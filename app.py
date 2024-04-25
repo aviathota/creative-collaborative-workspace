@@ -167,6 +167,8 @@ def save_tasks():
 
 @app.route('/my_tasks')
 def my_tasks():
+    if 'email' not in dt.userData:
+        return render_template('my_tasks.html')
     tasks_info = dt.getMyTasks(dt.userData['email'])
     return render_template('my_tasks.html', tasks=tasks_info)
 
