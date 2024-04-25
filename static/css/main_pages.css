@@ -75,3 +75,30 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+.contributors {
+  display: flex;
+  flex-direction: column;
+}
+
+.contributors label {
+  margin-bottom: 10px;
+}
+
+.contributor-input {
+  margin-bottom: 10px;
+}
+
+.add-contributor-btn {
+  margin-top: 10px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#create-project-btn {
+  margin-top: 50px; 
+}

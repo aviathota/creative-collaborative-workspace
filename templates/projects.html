@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Project</title>
+    <link rel="stylesheet" href="static/css/main_pages.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-icon">
+                <span class="icon">👤</span>
+                <span class="text">Profile</span>
+            </div>
+            <div class="sidebar-icon">
+                <span class="icon">📁</span>
+                <span class="text">Projects</span>
+            </div>
+            <div class="sidebar-icon">
+                <span class="icon">📊</span>
+                <span class="text">Tasks</span>
+            </div>
+            <div class="sidebar-icon">
+                <span class="icon">✉️</span>
+                <span class="text">Messages</span>
+            </div>
+        </div>
+        <div class="main-content">
+            <h1>Create New Project</h1>
+            <div>
+                <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name" name="project-name" required>
+            </div>
+            <div>
+                <br></br>
+            </div>
+            <div class="contributors">
+                <label for="contributor1">Contributors:</label>
+            </div>
+            <button id="add-contributor-btn" class="add-contributor-btn" onclick="addContributor()">Add Contributor</button>
+            <div class="btn-container">
+                <button id="create-project-btn">Create Project</button>
+            </div>
+        </div>
+    </div>
+    <script src="static/js/projects.js"></script>
+</body>
+</html>
