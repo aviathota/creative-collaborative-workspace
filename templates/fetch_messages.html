@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Messages</title>
+    <link rel="stylesheet" href="static\css\main_pages.css">
+    <style>
+        .message-list {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .sender {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .timestamp {
+            color: #888;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-icon">
+                <span class="icon">👤</span>
+                <span class="text">Profile</span>
+            </div>
+            <div class="sidebar-icon">
+                <span class="icon">📁</span>
+                <span class="text">Projects</span>
+            </div>
+            <div class="sidebar-icon">
+                <span class="icon">📊</span>
+                <span class="text">Tasks</span>
+            </div>
+            <div class="sidebar-icon">
+                <span class="icon">✉️</span>
+                <span class="text">Messages</span>
+            </div>
+        </div>
+        <div class="main-content">
+            <h1>All Messages</h1>
+            <div class="message-list">
+                {% for message in messages %}
+                <div class="message-item">
+                    <span class="sender">{{ message.sender }}</span>: 
+                    <span class="message">{{ message.message }}</span>
+                    <span class="timestamp">{{ message.timestamp }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <button onclick="goBack()">Go Back</button>
+        </div>
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
