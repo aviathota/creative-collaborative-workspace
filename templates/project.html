@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Projects</title>
-    <link rel="stylesheet" href="static/css/main_pages.css">
+    <title>{{ project.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_pages.css') }}">
 </head>
 <body>
     <div class="container">
@@ -27,20 +27,13 @@
             </a>
         </div>
         <div class="main-content">
-            <h1>All Projects</h1>
-            <div id="project-list">
-                {% for project in projects %}
-                <div class="project-item">
-                    <h3><a href="/project/{{ project.name }}">{{ project.name }}</a></h3>
-                    <p>Owner: {{ project.owner }}</p>
-                    <p>Contributors: 
-                        {% for contributor in project.contributors %}
-                            {{ contributor.S }}{% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    </p>
-                </div>
+            <h1>{{ project.name }}</h1>
+            <p>Owner: {{ project.owner }}</p>
+            <p>Contributors: 
+                {% for contributor in project.contributors %}
+                    {{ contributor }}{% if not loop.last %}, {% endif %}
                 {% endfor %}
-            </div>
+            </p>
             <button onclick="goBack()">Go Back</button>
         </div>
     </div>

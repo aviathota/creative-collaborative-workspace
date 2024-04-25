@@ -191,3 +191,43 @@ def getProjectsWithUser(user_id):
         return projects
     except:
         return "fail"
+
+def getProjectInfo(projectName):
+    tableName = "ccw-projects"
+    try:
+        response = client.get_item(
+            TableName=tableName,
+            Key={'ProjectID': {'S': projectName}}
+        )
+
+        item = response.get('Item', {})
+        
+        project_info = {
+            'name': item.get('ProjectID', {}).get('S', ''),
+            'owner': item.get('Owner', {}).get('S', ''),
+            'contributors': [contributor['S'] for contributor in item.get('Members', {}).get('L', [])]
+        }
+
+        return project_info
+    except:
+        return "fail"
+    
+def checkProjectPerms(user_id, project_id):
+    tableName = "ccw-projects"
+
+    try:
+        response = client.query(
+            TableName=tableName,
+            KeyConditionExpression='ProjectID = :pid',
+            FilterExpression='contains(Members, :uid)',
+            ExpressionAttributeValues={
+                ':pid': {'S': project_id},
+                ':uid': {'S': user_id}
+            }
+        )
+        if len(response['Items']) > 0:
+            return "success"
+        else:
+            return "fail"    
+    except Exception as e:
+        return "fail"

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Projects</title>
+    <title>Invalid Permissions</title>
     <link rel="stylesheet" href="static/css/main_pages.css">
 </head>
 <body>
@@ -27,26 +27,14 @@
             </a>
         </div>
         <div class="main-content">
-            <h1>All Projects</h1>
-            <div id="project-list">
-                {% for project in projects %}
-                <div class="project-item">
-                    <h3><a href="/project/{{ project.name }}">{{ project.name }}</a></h3>
-                    <p>Owner: {{ project.owner }}</p>
-                    <p>Contributors: 
-                        {% for contributor in project.contributors %}
-                            {{ contributor.S }}{% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    </p>
-                </div>
-                {% endfor %}
-            </div>
-            <button onclick="goBack()">Go Back</button>
+            <h1>Invalid Permissions</h1>
+            <p>You don't have permission to access this page.</p>
+            <button onclick="goBack()">Go Back to Projects</button>
         </div>
     </div>
     <script>
         function goBack() {
-            window.history.back();
+            window.location.href = '/projects';
         }
     </script>
 </body>

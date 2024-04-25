@@ -101,6 +101,18 @@ def view_projects():
     projects = dt.getProjectsWithUser(dt.userData['email'])
     return render_template('view_projects.html', projects=projects)
 
+@app.route('/project/<project_name>')
+def project(project_name):
+    if dt.checkProjectPerms(dt.userData['email'], project_name) == "success":
+        project_info = dt.getProjectInfo(project_name)
+        return render_template('project.html', project=project_info)
+    else:
+        return render_template('invalid_perms.html')
+
+@app.route('/invalid_perms')
+def invalid_perms():
+    return render_template('invalid_perms.html')
+
 if __name__ == '__main__':
     dt.userData = {}
     app.secret_key = sec.firebase_secret_key
