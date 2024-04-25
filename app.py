@@ -53,6 +53,10 @@ def signup_failed():
 def profile():
     return render_template('profile.html', profile=dt.retrieveUserData(dt.userData['email']))
 
+@app.route('/projects')
+def projects():
+    return render_template('projects.html', profile=dt.retrieveUserData(dt.userData['email']))
+
 @app.route('/update_profile', methods=['POST'])
 def update_profile():
     try:
@@ -61,6 +65,41 @@ def update_profile():
         return "success"
     except:
         return "fail"
+
+@app.route('/messages')
+def messages():
+    return render_template('messages.html', profile=dt.retrieveUserData(dt.userData['email']))
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    try:
+        data = request.json
+        dt.createMessage(dt.userData['email'], data['receiver'], data['message'])
+        return "success"
+    except:
+        return "fail"
+
+@app.route('/fetch_messages')
+def messages_page():
+    messages = dt.fetchMessages(dt.userData['email'])
+    return render_template('fetch_messages.html', messages=messages)
+
+@app.route('/create_project', methods=['POST'])
+def create_project():
+    try:
+        data = request.json
+        project_name = data.get('projectName')
+        contributors = data.get('contributors')
+        response = dt.createNewProject(project_name, dt.userData['email'])
+        response = dt.inviteMembers(project_name, contributors)
+        return "success"
+    except:
+        return "fail"    
+
+@app.route('/view_projects')
+def view_projects():
+    projects = dt.getProjectsWithUser(dt.userData['email'])
+    return render_template('view_projects.html', projects=projects)
 
 if __name__ == '__main__':
     dt.userData = {}
