@@ -12,11 +12,11 @@ body {
 .sidebar {
   width: 200px;
   background-color: #333;
-  color: white;
   padding: 20px;
 }
 
 .sidebar-icon {
+  color: white;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -24,6 +24,12 @@ body {
 
 .icon {
   margin-right: 10px;
+}
+
+.sidebar-icon a {
+  color: white;
+  text-decoration: none;
+  display: block;
 }
 
 .main-content {

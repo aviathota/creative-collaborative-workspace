@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="static/css/main_pages.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="/profile" class="sidebar-icon">
+                <span class="icon">👤</span>
+                <span class="text">Profile</span>
+            </a>
+            <a href="/projects" class="sidebar-icon">
+                <span class="icon">📁</span>
+                <span class="text">Projects</span>
+            </a>
+            <a href="/tasks" class="sidebar-icon">
+                <span class="icon">📊</span>
+                <span class="text">Tasks</span>
+            </a>
+            <a href="/messages" class="sidebar-icon">
+                <span class="icon">✉️</span>
+                <span class="text">Messages</span>
+            </a>
+        </div>
+        <div class="main-content">
+            <h1>Messages</h1>
+            <div class="message-form">
+                <div class="input-group">
+                    <label for="receiver">To:</label>
+                    <input type="text" id="receiver" name="receiver" placeholder="Enter recipient's username">
+                </div>
+                <div class="input-group">
+                    <label for="message-content">Message:</label>
+                    <textarea id="message-content" name="message-content" rows="4" placeholder="Type your message..."></textarea>
+                </div>
+                <button id="send-message-btn">Send Message</button>
+            </div>
+            <div id="message-list"></div>
+            <div style="margin-top: 50px;">
+                <label>Alternatively,<label>
+            </div>
+            <div style="margin-top: 10px;">
+                <button id="fetch-messages-btn">Fetch Messages</button>
+            </div>
+        </div>
+    </div>
+    <script src="static/js/messages.js"></script>
+</body>
+</html>
