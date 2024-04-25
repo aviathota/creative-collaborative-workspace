@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_pages.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="/profile" class="sidebar-icon">
+                <span class="icon">👤</span>
+                <span class="text">Profile</span>
+            </a>
+            <a href="/projects" class="sidebar-icon">
+                <span class="icon">📁</span>
+                <span class="text">Projects</span>
+            </a>
+            <a href="/my_tasks" class="sidebar-icon">
+                <span class="icon">📊</span>
+                <span class="text">Tasks</span>
+            </a>
+            <a href="/messages" class="sidebar-icon">
+                <span class="icon">✉️</span>
+                <span class="text">Messages</span>
+            </a>
+        </div>
+        <div class="main-content">
+            <h1>Manage Tasks for {{ project.name }}</h1>
+            <div id="tasks">
+                {% for task in tasks %}
+                <div class="task">
+                    <div class="input-group">
+                        <label for="task{{ loop.index }}">Task Name:</label>
+                        <input type="text" name="task" class="task-input" value="{{ task.name }}">
+                    </div>
+                    <div class="input-group">
+                        <label for="assignee{{ loop.index }}">Assignees:</label>
+                        <div class="assignees">
+                            {% for assignee in task.assignees %}
+                            <input type="text" name="assignee" class="assignee-input" value="{{ assignee }}"><br>
+                            {% endfor %}
+                        </div>
+                        <button onclick="addAssignee(this)">Add Assignee</button>
+                    </div>
+                    <button onclick="removeTask(this)">Remove Task</button>
+                </div>
+                {% endfor %}
+            </div>
+            <button onclick="addTask()">Add Task</button>
+            <button onclick="saveTasks()">Save Tasks</button>
+            <button onclick="goBack()">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            const tasksContainer = document.getElementById('tasks');
+            const taskDiv = document.createElement('div');
+            taskDiv.classList.add('task');
+            taskDiv.innerHTML = `
+                <div class="input-group">
+                    <label for="task">Task Name:</label>
+                    <input type="text" name="task" class="task-input">
+                </div>
+                <div class="input-group">
+                    <label for="assignee">Assignees:</label>
+                    <div class="assignees">
+                        <input type="text" name="assignee" class="assignee-input">
+                        <br>
+                    </div>
+                    <button onclick="addAssignee(this)">Add Assignee</button>
+                </div>
+                <button onclick="removeTask(this)" class="remove-task-button">Remove Task</button>
+            `;
+            tasksContainer.appendChild(taskDiv);
+        }
+
+        function removeTask(btn) {
+            const taskDiv = btn.parentElement;
+            taskDiv.remove();
+        }
+
+        function addAssignee(btn) {
+            const assigneesDiv = btn.previousElementSibling;
+            const assigneeInput = document.createElement('input');
+            assigneeInput.type = 'text';
+            assigneeInput.name = 'assignee';
+            assigneeInput.classList.add('assignee-input');
+            assigneeInput.style.display = 'block';
+            assigneesDiv.appendChild(assigneeInput);
+        }
+
+        function saveTasks() {
+            const tasks = document.querySelectorAll('.task-input');
+            const assignees = document.querySelectorAll('.assignee-input');
+            const taskList = [];
+            tasks.forEach((task, index) => {
+                const assigneeList = [];
+                const assigneesForTask = assignees[index].parentElement.querySelectorAll('.assignee-input');
+                assigneesForTask.forEach(assignee => {
+                    assigneeList.push(assignee.value.trim());
+                });
+                const taskData = {
+                    task: task.value.trim(),
+                    assignees: assigneeList
+                };
+                taskList.push(taskData);
+            });
+            fetch('/save_tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    projectName: '{{ project.name }}',
+                    tasks: taskList 
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Tasks saved successfully!');
+                } else {
+                    alert('Failed to save tasks');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving tasks:', error);
+            });
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

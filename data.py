@@ -250,3 +250,107 @@ def checkOwnerPerms(user_id, project_id):
             return "fail"
     except:
         return "fail"
+
+def createTask(project_id, task_name, assignees):
+    tableName = "ccw-tasks"
+    new_item = {
+        'TaskID': {'S': str(random.getrandbits(128))},
+        'ProjectID': {'S': project_id},
+        'TaskName': {'S': task_name},
+        'Assignees': {'L': [{'S': assignee} for assignee in assignees]}
+    }
+    try:
+        response = client.put_item(
+            TableName=tableName,
+            Item=new_item
+        )
+        
+        return "success"
+    except:
+        return "fail"
+
+def purgeTasks(project_id):
+    tableName = "ccw-tasks"
+    try:
+        response = client.scan(
+            TableName=tableName,
+            FilterExpression='ProjectID = :pid',
+            ExpressionAttributeValues={':pid': {'S': project_id}}
+        )
+
+        for item in response['Items']:
+            key = {'TaskID': item['TaskID']}
+            client.delete_item(
+                TableName=tableName,
+                Key=key
+            )
+        return "success"
+    except:
+        return "fail"
+
+def getTasks(project_id):
+    tableName = "ccw-tasks"
+    try:
+        response = client.scan(
+            TableName=tableName,
+            FilterExpression='ProjectID = :pid',
+            ExpressionAttributeValues={':pid': {'S': project_id}}
+        )
+
+        tasks = []
+        for item in response['Items']:
+            task = {
+                'name': item.get('TaskName', {}).get('S', ''),
+                'assignees': [assignee.get('S', '') for assignee in item.get('Assignees', {}).get('L', [])]
+            }
+            tasks.append(task)
+        return tasks
+    except:
+        return "fail"
+
+def getMyTasks(user_id):
+    tableName = "ccw-tasks"
+    try:
+        response = client.scan(
+            TableName=tableName,
+            FilterExpression='contains(Assignees, :user)',
+            ExpressionAttributeValues={':user': {'S': user_id}}
+        )
+
+        tasks = []
+        for item in response.get('Items', []):
+            task = {
+                'project_id': item.get('ProjectID', {}).get('S', ''),
+                'task_name': item.get('TaskName', {}).get('S', ''),
+                'assignees': item.get('Assignees', {}).get('L', [])
+            }
+            tasks.append(task)
+
+        return tasks
+    except:
+        return "fail"
+
+def completeTask(task_name, project_id):
+    tableName = "ccw-tasks"
+    try:
+        response = client.scan(
+            TableName=tableName,
+            FilterExpression='TaskName = :tname AND ProjectID = :pid',
+            ExpressionAttributeValues={
+                ':tname': {'S': task_name},
+                ':pid': {'S': project_id}
+            }
+        )
+        items = response['Items']
+        
+        for item in items:
+            client.delete_item(
+                TableName=tableName,
+                Key={
+                    'TaskID': item['TaskID']
+                }
+            )
+        
+        return "success"
+    except Exception as e:
+        return "fail"

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_pages.css') }}">
+    <style>
+        .task-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .task-item h3 {
+            margin-top: 0;
+        }
+
+        .task-item p {
+            margin: 5px 0;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="/profile" class="sidebar-icon">
+                <span class="icon">👤</span>
+                <span class="text">Profile</span>
+            </a>
+            <a href="/projects" class="sidebar-icon">
+                <span class="icon">📁</span>
+                <span class="text">Projects</span>
+            </a>
+            <a href="/my_tasks" class="sidebar-icon">
+                <span class="icon">📊</span>
+                <span class="text">Tasks</span>
+            </a>
+            <a href="/messages" class="sidebar-icon">
+                <span class="icon">✉️</span>
+                <span class="text">Messages</span>
+            </a>
+        </div>
+        <div class="main-content">
+            <h1>My Tasks</h1>
+            <div id="task-list">
+                {% for task in tasks %}
+                <div class="task-item" id="{{ task.task_name }}">
+                    <h3>Task: {{ task.task_name }}</h3>
+                    <p>Project: {{ task.project_id }}</p>
+                    <p>Assignees: 
+                        {% for assignee in task.assignees %}
+                            {{ assignee.S }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                    <button class="delete-btn" onclick="deleteTask('{{ task.task_name }}', '{{ task.project_id }}')">Delete Task</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function deleteTask(taskName, projectId) {
+            fetch('/delete_task', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task_name: taskName, project_id: projectId })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Task deleted successfully");
+                    document.getElementById(taskName).remove();
+                } else {
+                    alert('Failed to delete task');
+                }
+            })
+            .catch(error => {
+                alert('Error deleting task:', error);
+            });
+        }        
+    </script>
+</body>
+</html>

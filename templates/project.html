@@ -17,7 +17,7 @@
                 <span class="icon">📁</span>
                 <span class="text">Projects</span>
             </a>
-            <a href="/tasks" class="sidebar-icon">
+            <a href="/my_tasks" class="sidebar-icon">
                 <span class="icon">📊</span>
                 <span class="text">Tasks</span>
             </a>
@@ -35,9 +35,12 @@
                 {% endfor %}
             </p>
             <button onclick="edit_personnel()">Edit Personnel</button>
+            <h1>Manage Tasks</h1>
+            <button onclick="manageTasks()">Manage Tasks</button>
             <button onclick="goBack()">Go Back</button>
         </div>
     </div>
+
     <script>
         function goBack() {
             window.history.back();
@@ -45,6 +48,10 @@
 
         function edit_personnel() {
             window.location.href = '/project/{{ project.name }}/edit_personnel';
+        }
+
+        function manageTasks() {
+            window.location.href = '/project/{{ project.name }}/tasks';
         }
     </script>
 </body>

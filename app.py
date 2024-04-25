@@ -130,14 +130,51 @@ def add_contributors():
     try:
         if dt.checkOwnerPerms(dt.userData['email'], project_name) == "success":
             response = dt.inviteMembers(project_name, contributors)
-            print("wawa")
             return "success"
         else:
-            print("uh")
             return "fail"
     except:
-        print("did it work")
         return "fail"
+
+@app.route('/project/<project_name>/tasks')
+def tasks(project_name):
+    if dt.checkProjectPerms(dt.userData['email'], project_name) == "success":
+        project_info = dt.getProjectInfo(project_name)
+        tasks_info = dt.getTasks(project_name)
+        return render_template('tasks.html', project=project_info, tasks=tasks_info)
+    else:
+        return render_template('invalid_perms.html')
+
+@app.route('/save_tasks', methods=['POST'])
+def save_tasks():
+    data = request.get_json()
+    tasks = data.get('tasks', [])
+    project_name = data.get('projectName')
+    
+    try:
+        response = dt.purgeTasks(project_name)
+
+        for task in tasks:
+            task_name = task.get('task')
+            assignees = task.get('assignees')
+            reponse = dt.createTask(project_name, task_name, assignees)
+        
+        return "success"
+    except:
+        return "fail"
+
+@app.route('/my_tasks')
+def my_tasks():
+    tasks_info = dt.getMyTasks(dt.userData['email'])
+    return render_template('my_tasks.html', tasks=tasks_info)
+
+@app.route('/delete_task', methods=['POST'])
+def delete_task():
+    data = request.get_json()
+    task_name = data.get('task_name')
+    project_id = data.get('project_id')
+    response = dt.completeTask(task_name, project_id)
+    return response
 
 if __name__ == '__main__':
     dt.userData = {}
