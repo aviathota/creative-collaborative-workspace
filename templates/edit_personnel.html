@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ project.name }}</title>
+    <title>Edit Personnel - {{ project.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main_pages.css') }}">
 </head>
 <body>
@@ -27,24 +27,27 @@
             </a>
         </div>
         <div class="main-content">
-            <h1>{{ project.name }}</h1>
-            <p>Owner: {{ project.owner }}</p>
-            <p>Contributors: 
-                {% for contributor in project.contributors %}
-                    {{ contributor }}{% if not loop.last %}, {% endif %}
-                {% endfor %}
-            </p>
-            <button onclick="edit_personnel()">Edit Personnel</button>
+            <h1>Edit Personnel - {{ project.name }}</h1>
+            <form id="edit-personnel-form">
+                <div class="input-group">
+                    <label for="new-contributor">New Contributor:</label>
+                    <input type="text" id="new-contributor" name="new-contributor">
+                    <button type="button" id="add-contributor-btn">Add</button>
+                </div>
+                <div class="contributors">
+                    <label>Current Contributors:</label>
+                    {% for contributor in project.contributors %}
+                        <div>{{ contributor }}</div>
+                    {% endfor %}
+                </div>
+                <button type="submit">Save Changes</button>
+            </form>
             <button onclick="goBack()">Go Back</button>
         </div>
     </div>
     <script>
         function goBack() {
             window.history.back();
-        }
-
-        function edit_personnel() {
-            window.location.href = '/project/{{ project.name }}/edit_personnel';
         }
     </script>
 </body>

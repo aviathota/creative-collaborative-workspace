@@ -214,7 +214,6 @@ def getProjectInfo(projectName):
     
 def checkProjectPerms(user_id, project_id):
     tableName = "ccw-projects"
-
     try:
         response = client.query(
             TableName=tableName,
@@ -230,4 +229,24 @@ def checkProjectPerms(user_id, project_id):
         else:
             return "fail"    
     except Exception as e:
+        return "fail"
+
+def checkOwnerPerms(user_id, project_id):
+    tableName = "ccw-projects"
+    try:
+        response = client.get_item(
+            TableName=tableName,
+            Key={
+                'ProjectID': {'S': project_id}
+            },
+            ProjectionExpression='#o',
+            ExpressionAttributeNames={'#o': 'Owner'}
+        )
+        owner = response.get('Item', {}).get('Owner', {}).get('S', '')
+
+        if owner == user_id:
+            return "success"
+        else:
+            return "fail"
+    except:
         return "fail"
