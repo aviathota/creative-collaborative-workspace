@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Tasks</title>
+    <title>Manage Tasks for {{ project.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main_pages.css') }}">
 </head>
 <body>
@@ -36,6 +36,10 @@
                         <input type="text" name="task" class="task-input" value="{{ task.name }}">
                     </div>
                     <div class="input-group">
+                        <label for="description{{ loop.index }}">Description:</label>
+                        <input type="text" name="description" class="description-input" value="{{ task.description }}">
+                    </div>
+                    <div class="input-group">
                         <label for="assignee{{ loop.index }}">Assignees:</label>
                         <div class="assignees">
                             {% for assignee in task.assignees %}
@@ -44,7 +48,7 @@
                         </div>
                         <button onclick="addAssignee(this)">Add Assignee</button>
                     </div>
-                    <button onclick="removeTask(this)">Remove Task</button>
+                    <button onclick="removeTask(this)" class="remove-task-button">Remove Task</button>
                 </div>
                 {% endfor %}
             </div>
@@ -63,6 +67,10 @@
                 <div class="input-group">
                     <label for="task">Task Name:</label>
                     <input type="text" name="task" class="task-input">
+                </div>
+                <div class="input-group">
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" class="description-input">
                 </div>
                 <div class="input-group">
                     <label for="assignee">Assignees:</label>
@@ -94,6 +102,7 @@
 
         function saveTasks() {
             const tasks = document.querySelectorAll('.task-input');
+            const descriptions = document.querySelectorAll('.description-input');
             const assignees = document.querySelectorAll('.assignee-input');
             const taskList = [];
             tasks.forEach((task, index) => {
@@ -104,6 +113,7 @@
                 });
                 const taskData = {
                     task: task.value.trim(),
+                    description: descriptions[index].value.trim(),
                     assignees: assigneeList
                 };
                 taskList.push(taskData);

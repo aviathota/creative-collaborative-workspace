@@ -156,8 +156,9 @@ def save_tasks():
 
         for task in tasks:
             task_name = task.get('task')
+            description = task.get('description')
             assignees = task.get('assignees')
-            reponse = dt.createTask(project_name, task_name, assignees)
+            reponse = dt.createTask(project_name, task_name, description, assignees)
         
         return "success"
     except:

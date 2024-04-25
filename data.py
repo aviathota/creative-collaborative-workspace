@@ -251,12 +251,13 @@ def checkOwnerPerms(user_id, project_id):
     except:
         return "fail"
 
-def createTask(project_id, task_name, assignees):
+def createTask(project_id, task_name, description, assignees):
     tableName = "ccw-tasks"
     new_item = {
         'TaskID': {'S': str(random.getrandbits(128))},
         'ProjectID': {'S': project_id},
         'TaskName': {'S': task_name},
+        'Description': {'S': description},
         'Assignees': {'L': [{'S': assignee} for assignee in assignees]}
     }
     try:
@@ -301,6 +302,7 @@ def getTasks(project_id):
         for item in response['Items']:
             task = {
                 'name': item.get('TaskName', {}).get('S', ''),
+                'description': item.get('Description', {}).get('S', ''),
                 'assignees': [assignee.get('S', '') for assignee in item.get('Assignees', {}).get('L', [])]
             }
             tasks.append(task)
@@ -321,6 +323,7 @@ def getMyTasks(user_id):
         for item in response.get('Items', []):
             task = {
                 'project_id': item.get('ProjectID', {}).get('S', ''),
+                'description': item.get('Description', {}).get('S', ''),
                 'task_name': item.get('TaskName', {}).get('S', ''),
                 'assignees': item.get('Assignees', {}).get('L', [])
             }
@@ -352,5 +355,5 @@ def completeTask(task_name, project_id):
             )
         
         return "success"
-    except Exception as e:
+    except:
         return "fail"

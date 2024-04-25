@@ -62,6 +62,7 @@
                 <div class="task-item" id="{{ task.task_name }}">
                     <h3>Task: {{ task.task_name }}</h3>
                     <p>Project: {{ task.project_id }}</p>
+                    <p>Description: {{ task.description }}</p>
                     <p>Assignees: 
                         {% for assignee in task.assignees %}
                             {{ assignee.S }}{% if not loop.last %}, {% endif %}
