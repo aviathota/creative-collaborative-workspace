@@ -20,11 +20,12 @@ We plan to use DynamoDB as the backbone for storing essential entities such as u
 
 1. Clone the repository to a desired location on your computer using the following command in terminal.
    - `git clone https://github.com/aviathota/creative-collaborative-workspace.git`
-2. Install the necessary dependencies by running the following command within the project directory.
+2. Download the `db_secrets.py` file that we'll provide you, and place it inside the project directory with all the other Python files.
+3. Install the necessary dependencies by running the following command within the project directory.
    - `pip install -r requirements.txt`
-3. Run the application from within the project directory.
+4. Run the application from within the project directory.
    - `python app.py`
-4. After entering the above command, you will get a `localhost` link to open up the page. Navigate to that link and begin using the app!
+5. After entering the above command, you will get a `localhost` link to open up the page. Navigate to that link and begin using the app!
 
 ## Feedback
 
