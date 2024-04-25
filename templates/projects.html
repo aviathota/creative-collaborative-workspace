@@ -9,22 +9,22 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <div class="sidebar-icon">
+            <a href="/profile" class="sidebar-icon">
                 <span class="icon">👤</span>
                 <span class="text">Profile</span>
-            </div>
-            <div class="sidebar-icon">
+            </a>
+            <a href="/projects" class="sidebar-icon">
                 <span class="icon">📁</span>
                 <span class="text">Projects</span>
-            </div>
-            <div class="sidebar-icon">
+            </a>
+            <a href="/tasks" class="sidebar-icon">
                 <span class="icon">📊</span>
                 <span class="text">Tasks</span>
-            </div>
-            <div class="sidebar-icon">
+            </a>
+            <a href="/messages" class="sidebar-icon">
                 <span class="icon">✉️</span>
                 <span class="text">Messages</span>
-            </div>
+            </a>
         </div>
         <div class="main-content">
             <h1>Create New Project</h1>
@@ -41,6 +41,12 @@
             <button id="add-contributor-btn" class="add-contributor-btn" onclick="addContributor()">Add Contributor</button>
             <div class="btn-container">
                 <button id="create-project-btn">Create Project</button>
+            </div>
+            <div style="margin-top: 100px;">
+                <h1>Access Old Projects</h1>
+            </div>
+            <div style="margin-top: 10px;">
+                <button id="show-projects-btn">Load Projects</button>
             </div>
         </div>
     </div>
