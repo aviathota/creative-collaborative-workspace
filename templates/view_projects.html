@@ -33,7 +33,11 @@
                 <div class="project-item">
                     <h3>{{ project.name }}</h3>
                     <p>Owner: {{ project.owner }}</p>
-                    <p>Contributors: {{ project.contributors | join(', ') }}</p>
+                    <p>Contributors: 
+                        {% for contributor in project.contributors %}
+                            {{ contributor.S }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
                 </div>
                 {% endfor %}
             </div>

@@ -102,3 +102,37 @@ button:hover {
 #create-project-btn {
   margin-top: 50px; 
 }
+
+button#show-projects-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.project-list {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.project-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.project-item h3 {
+  margin: 0;
+}
+
+.project-item p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #444;
+}

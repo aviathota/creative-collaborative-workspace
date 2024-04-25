@@ -29,9 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const newContributorInput = document.createElement('input');
         newContributorInput.type = 'text';
         newContributorInput.classList.add('contributor-input');
-        newContributorInput.placeholder = 'Contributor';
         contributorsContainer.appendChild(newContributorInput);
 
         newContributorInput.style.marginBottom = '10px';
+    });
+
+    const showProjectsBtn = document.getElementById('show-projects-btn');
+
+    showProjectsBtn.addEventListener('click', function() {
+        window.location.href = '/view_projects';
     });
 });
