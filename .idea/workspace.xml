@@ -6,7 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="5ef333b0-ae3f-42ac-9546-8c6149c40142" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main_pages.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_pages.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/edit_personnel.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_personnel.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/fetch_messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fetch_messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/invalid_perms.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/invalid_perms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/my_tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/view_projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_projects.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +77,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+    </key>
+  </component>
   <component name="RunManager" selected="Flask server.Flask (app.py)">
     <configuration name="creative-collaborative-workspace" type="PythonConfigurationType" factoryName="Python">
       <module name="creative-collaborative-workspace" />
@@ -97,7 +112,7 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -119,7 +134,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713886400110</updated>
-      <workItem from="1713886401232" duration="20817000" />
+      <workItem from="1713886401232" duration="23108000" />
     </task>
     <servers />
   </component>
