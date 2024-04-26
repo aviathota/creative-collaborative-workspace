@@ -72,8 +72,21 @@ button {
   cursor: pointer;
 }
 
+.red_button {
+  padding: 10px 20px;
+  background-color: #FF0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 button:hover {
   background-color: #45a049;
+}
+
+.red_button:hover {
+  background-color: #FF4500;
 }
 
 .contributors {

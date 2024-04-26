@@ -198,6 +198,14 @@ def download_file(filename):
         return "success"
     except:
         return "fail"
+
+@app.route('/delete_file/<project_name>/<filename>', methods=['POST'])
+def delete_file(project_name, filename):
+    try:
+        response = dt.deleteFile(project_name, filename)
+        return "success"
+    except:
+        return "fail"
     
 if __name__ == '__main__':
     dt.userData = {}
