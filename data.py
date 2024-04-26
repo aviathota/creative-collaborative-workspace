@@ -371,6 +371,16 @@ def uploadFiles(file, project_name):
         return 'File uploaded successfully', 200
     except Exception as e:
         return 'Failed to upload file', 500
+
+def deleteFile(project_name, filename):
+    s3_bucket = "ccw-storage"
+    file_key = f"{project_name}/{filename}"
+    try:
+        s3.delete_object(Bucket=s3_bucket, Key=file_key)
+        return "success"
+    except Exception as e:
+        print(e)
+        return "fail"
     
 def getProjectFiles(project_name):
     try:
