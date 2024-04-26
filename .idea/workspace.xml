@@ -6,16 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5ef333b0-ae3f-42ac-9546-8c6149c40142" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_pages.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main_pages.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/edit_personnel.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_personnel.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/fetch_messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fetch_messages.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/invalid_perms.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/invalid_perms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login_error.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login_error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/messages.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/my_tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_tasks.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup_error.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signup_error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/view_projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_projects.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +133,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713886400110</updated>
-      <workItem from="1713886401232" duration="23108000" />
+      <workItem from="1713886401232" duration="25338000" />
     </task>
     <servers />
   </component>
